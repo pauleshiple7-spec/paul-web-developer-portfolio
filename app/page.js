@@ -1,12 +1,13 @@
 const projects = [
-  {
-    number: "01",
-    title: "Football Live Scores",
-    description:
-      "A football-focused application concept for fixtures, live scores, match details, teams and league information.",
-    tags: ["Next.js", "JavaScript", "API"],
-    status: "In progress",
-  },
+ {
+  number: "01",
+  title: "Football Live Scores",
+  description:
+    "A football-focused application for fixtures, live scores, match details, teams and league information.",
+  tags: ["Flutter", "Dart", "Firebase", "API"],
+  status: "In progress",
+  github: "https://github.com/pauleshiple7-spec/football_app",
+},
   {
     number: "02",
     title: "Student House Finder",
@@ -135,6 +136,19 @@ export default function Home() {
                   <div className="tags">
                     {project.tags.map((tag) => <span key={tag}>{tag}</span>)}
                   </div>
+                  <div className="projectLinks">
+  <a href="#" className="projectButton">
+    View Project ↗
+  </a>
+  <a
+      href={project.github || "https://github.com/pauleshiple7-spec"}
+    target="_blank"
+    rel="noreferrer"
+    className="projectButton outline"
+  >
+    GitHub ↗
+  </a>
+</div>
                 </div>
                 <div className="projectArrow">↗</div>
               </article>
