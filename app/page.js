@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const projects = [
  {
   number: "01",
@@ -52,7 +54,15 @@ export default function Home() {
         <a className="navCta" href="#contact">Let's talk <span>↗</span></a>
       </nav>
 
-      <section id="home" className="hero">
+      <section id="about" className="hero">
+        <div className="aboutPhoto">
+  <Image
+    src="/paul-profile.png"
+    alt="Paul Eshiple"
+    width={400}
+    height={400}
+  />
+</div>
         <div className="heroGrid">
           <div>
             <p className="eyebrow"><span className="dot"></span> WEB DEVELOPER</p>
