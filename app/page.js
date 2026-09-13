@@ -151,13 +151,13 @@ export default function Home() {
     View Project ↗
   </a>
   <a
-      href={project.github || "https://github.com/pauleshiple7-spec"}
-    target="_blank"
-    rel="noreferrer"
-    className="projectButton outline"
-  >
-    GitHub ↗
-  </a>
+  href={project.github || "https://github.com/pauleshiple7-spec"}
+  target="_blank"
+  rel="noreferrer"
+  className="projectButton outline"
+>
+  GitHub ↗
+</a>
 </div>
                 </div>
                 <div className="projectArrow">↗</div>
