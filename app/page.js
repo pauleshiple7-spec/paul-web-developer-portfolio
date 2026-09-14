@@ -1,199 +1,187 @@
-import Image from "next/image";
+"use client";
 
-const projects = [
- {
-  number: "01",
-  title: "Football Live Scores",
-  description:
-    "A football-focused application for fixtures, live scores, match details, teams and league information.",
-  tags: ["Flutter", "Dart", "Firebase", "API"],
-  status: "In progress",
-  github: "https://github.com/pauleshiple7-spec/football_app",
-},
+import { useState } from "react";
+
+const houses = [
   {
-    number: "02",
-    title: "Student House Finder",
-    description:
-      "A responsive property-search concept designed to help students find accommodation by location, price and property type.",
-    tags: ["React", "CSS", "UI/UX"],
-    status: "Demo project",
+    id: 1,
+    title: "Modern Self-Contain",
+    location: "Yaba, Lagos",
+    price: "₦650,000/year",
+    type: "Self Contain",
+    bedrooms: 1,
+    image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267",
   },
   {
-    number: "03",
-    title: "Medical Laboratory Website",
-    description:
-      "A professional website concept for a diagnostic laboratory, with services, test information, contact details and a clean responsive layout.",
-    tags: ["HTML", "CSS", "JavaScript"],
-    status: "Demo project",
+    id: 2,
+    title: "2 Bedroom Student Apartment",
+    location: "Surulere, Lagos",
+    price: "₦900,000/year",
+    type: "2 Bedroom",
+    bedrooms: 2,
+    image: "https://images.unsplash.com/photo-1560185008-b033106af5c3",
   },
-];
-
-const skills = [
-  "HTML5",
-  "CSS3",
-  "JavaScript",
-  "React",
-  "Next.js",
-  "Responsive Design",
-  "REST APIs",
-  "Git & GitHub",
-  "UI/UX",
+  {
+    id: 3,
+    title: "Affordable Student Room",
+    location: "Akoka, Lagos",
+    price: "₦450,000/year",
+    type: "Room",
+    bedrooms: 1,
+    image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
+  },
 ];
 
 export default function Home() {
+  const [search, setSearch] = useState("");
+  const [type, setType] = useState("All");
+
+  const filteredHouses = houses.filter((house) => {
+    const matchesSearch =
+      house.title.toLowerCase().includes(search.toLowerCase()) ||
+      house.location.toLowerCase().includes(search.toLowerCase());
+
+    const matchesType = type === "All" || house.type === type;
+
+    return matchesSearch && matchesType;
+  });
+
   return (
     <main>
-      <nav className="nav">
-        <a href="#home" className="logo">PE<span>.</span></a>
+      <nav className="navbar">
+        <div className="logo">🏠 StudentStay</div>
+
         <div className="navLinks">
+          <a href="#home">Home</a>
+          <a href="#houses">Find Houses</a>
           <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
           <a href="#contact">Contact</a>
         </div>
-        <a className="navCta" href="#contact">Let's talk <span>↗</span></a>
+
+        <button className="postButton">Post a House</button>
       </nav>
 
-      <section id="about" className="hero">
-        <div className="aboutPhoto">
-  <Image
-    src="/paul-profile.png"
-    alt="Paul Eshiple"
-    width={400}
-    height={400}
-  />
-</div>
-        <div className="heroGrid">
+      <section className="hero" id="home">
+        <div className="heroContent">
+          <p className="smallText">STUDENT HOUSING MADE EASY</p>
+
+          <h1>
+            Find a place
+            <br />
+            <span>you can call home.</span>
+          </h1>
+
+          <p className="heroText">
+            Discover affordable student accommodation near your school,
+            campus or preferred location.
+          </p>
+
+          <div className="searchBox">
+            <input
+              type="text"
+              placeholder="Search location or property..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+
+            <select value={type} onChange={(e) => setType(e.target.value)}>
+              <option value="All">All Types</option>
+              <option value="Room">Room</option>
+              <option value="Self Contain">Self Contain</option>
+              <option value="2 Bedroom">2 Bedroom</option>
+            </select>
+
+            <button>Search</button>
+          </div>
+        </div>
+      </section>
+
+      <section className="houses" id="houses">
+        <div className="sectionHeader">
           <div>
-            <p className="eyebrow"><span className="dot"></span> WEB DEVELOPER</p>
-            <h1>I build websites<br />that <em>grow.</em></h1>
-            <p className="heroText">
-              I&apos;m Paul Eshiple, a web developer creating modern, responsive and practical websites and web applications for businesses, startups and individuals.
-            </p>
-            <div className="heroButtons">
-              <a className="button primary" href="#projects">View my work <span>↗</span></a>
-              <a className="button secondary" href="#contact">Contact me</a>
-            </div>
+            <p className="smallText">AVAILABLE PROPERTIES</p>
+            <h2>Find your next home.</h2>
           </div>
 
-          <div className="heroCard">
-            <div className="codeTop">
-              <span>paul.dev</span>
-              <span>● ● ●</span>
-            </div>
-            <pre>{`const developer = {
-  name: "Paul Eshiple",
-  role: "Web Developer",
-  stack: [
-    "JavaScript",
-    "React",
-    "Next.js"
-  ],
-  focus: "Great user experiences"
-};`}</pre>
-            <div className="cardFooter">Available for freelance projects & web opportunities</div>
-          </div>
+          <p>{filteredHouses.length} properties found</p>
         </div>
-        <div className="scrollHint">SCROLL TO EXPLORE <span>↓</span></div>
-      </section>
 
-      <section id="about" className="section about">
-        <div className="sectionLabel">01 — ABOUT</div>
-        <div>
-          <h2>Turning ideas into <span>digital experiences.</span></h2>
-          <p className="lead">
-            I enjoy taking an idea and turning it into a useful, polished
-            web experience. My focus is on responsive interfaces, clear
-            navigation and functionality that makes sense to the user.
-          </p>
-          <p>
-            I&apos;m currently building my portfolio through practical projects
-            and continuously improving my JavaScript and modern web-development
-            skills. I&apos;m open to freelance work, collaborations and junior
-            web-development opportunities.
-          </p>
-        </div>
-      </section>
+        <div className="houseGrid">
+          {filteredHouses.map((house) => (
+            <article className="houseCard" key={house.id}>
+              <img src={`${house.image}?auto=format&fit=crop&w=900&q=80`} />
 
-      <section id="skills" className="section skillsSection">
-        <div className="sectionLabel">02 — SKILLS</div>
-        <div>
-          <h2>Tools I use to <span>build.</span></h2>
-          <div className="skillsGrid">
-            {skills.map((skill) => <div className="skill" key={skill}>{skill}</div>)}
-          </div>
-        </div>
-      </section>
-
-      <section id="projects" className="section projectsSection">
-        <div className="sectionLabel">03 — SELECTED WORK</div>
-        <div className="projectsWrap">
-          <div className="projectsIntro">
-            <h2>Projects built to <span>solve problems.</span></h2>
-            <p>
-              These are personal and demo projects created to demonstrate my
-              development skills. More projects will be added as I build.
-            </p>
-          </div>
-          <div className="projects">
-            {projects.map((project) => (
-              <article className="project" key={project.number}>
-                <div className="projectNumber">{project.number}</div>
-                <div className="projectBody">
-                  <div className="projectStatus">{project.status}</div>
-                  <h3>{project.title}</h3>
-                  <p>{project.description}</p>
-                  <div className="tags">
-                    {project.tags.map((tag) => <span key={tag}>{tag}</span>)}
-                  </div>
-                  <div className="projectLinks">
-  <a href="#" className="projectButton">
-    View Project ↗
-  </a>
-  <a
-  href={project.github || "https://github.com/pauleshiple7-spec"}
-  target="_blank"
-  rel="noreferrer"
-  className="projectButton outline"
->
-  GitHub ↗
-</a>
-</div>
+              <div className="houseInfo">
+                <div className="houseTop">
+                  <span className="tag">{house.type}</span>
+                  <span>♡</span>
                 </div>
-                <div className="projectArrow">↗</div>
-              </article>
-            ))}
-          </div>
+
+                <h3>{house.title}</h3>
+
+                <p className="location">📍 {house.location}</p>
+
+                <div className="houseBottom">
+                  <strong>{house.price}</strong>
+                  <span>{house.bedrooms} Bedroom</span>
+                </div>
+
+                <button className="detailsButton">
+                  View Details →
+                </button>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
-      <section className="statement">
-        <p>GOOD CODE. CLEAN DESIGN. <span>USEFUL PRODUCTS.</span></p>
-      </section>
-
-      <section id="contact" className="section contact">
-        <div className="sectionLabel">04 — CONTACT</div>
+      <section className="features" id="about">
         <div>
-          <h2>Have an idea?<br /><span>Let&apos;s build it.</span></h2>
-          <p className="lead">
-            If you need a website or web application, I&apos;d love to hear
-            about it.
-          </p>
-          <div className="contactLinks">
-            <a href="mailto:Pauleshiple7@gmail.com">Pauleshiple7@gmail.com <span>↗</span></a>
-            <a href="https://wa.me/2348134783737" target="_blank" rel="noreferrer">WhatsApp — 08134783737 <span>↗</span></a>
-            <a href="https://wa.me/2347026913217" target="_blank" rel="noreferrer">WhatsApp — 07026913217 <span>↗</span></a>
-            <a href="https://github.com/pauleshiple7-spec" target="_blank" rel="noreferrer">GitHub — pauleshiple7-spec <span>↗</span></a>
-          </div>
-          <p className="editNote">
-            LinkedIn can be added later when you have a profile.
-          </p>
+          <p className="smallText">WHY STUDENTSTAY?</p>
+          <h2>Housing should be simple.</h2>
         </div>
+
+        <div className="featureGrid">
+          <div>
+            <span>01</span>
+            <h3>Search easily</h3>
+            <p>
+              Find properties by location, price and property type.
+            </p>
+          </div>
+
+          <div>
+            <span>02</span>
+            <h3>Affordable options</h3>
+            <p>
+              Discover accommodation designed around student budgets.
+            </p>
+          </div>
+
+          <div>
+            <span>03</span>
+            <h3>Save time</h3>
+            <p>
+              Compare different properties without visiting every location.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="contact" id="contact">
+        <p className="smallText">GET STARTED</p>
+        <h2>Ready to find your next home?</h2>
+        <p>
+          StudentStay makes it easier for students to discover suitable
+          accommodation.
+        </p>
+        <button>Explore Houses →</button>
       </section>
 
       <footer>
-        <span>© {new Date().getFullYear()} Paul Eshiple</span>
-        <span>Built with Next.js</span>
+        <div>🏠 StudentStay</div>
+        <p>Student housing made simple.</p>
+        <p>© 2026 StudentStay</p>
       </footer>
     </main>
   );
