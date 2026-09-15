@@ -17,6 +17,7 @@ const projects = [
       "A responsive property-search concept designed to help students find accommodation by location, price and property type.",
     tags: ["React", "CSS", "UI/UX"],
     status: "Demo project",
+    github: "https://github.com/pauleshiple7-spec/student-house-finder",
   },
   {
     number: "03",
@@ -183,7 +184,14 @@ export default function Home() {
             <a href="mailto:Pauleshiple7@gmail.com">Pauleshiple7@gmail.com <span>↗</span></a>
             <a href="https://wa.me/2348134783737" target="_blank" rel="noreferrer">WhatsApp — 08134783737 <span>↗</span></a>
             <a href="https://wa.me/2347026913217" target="_blank" rel="noreferrer">WhatsApp — 07026913217 <span>↗</span></a>
-            <a href="https://github.com/pauleshiple7-spec" target="_blank" rel="noreferrer">GitHub — pauleshiple7-spec <span>↗</span></a>
+            <a
+  href={project.github || "https://github.com/pauleshiple7-spec"}
+  target="_blank"
+  rel="noreferrer"
+  className="projectButton outline"
+>
+  GitHub ↗
+</a>
           </div>
           <p className="editNote">
             LinkedIn can be added later when you have a profile.
